@@ -1,5 +1,7 @@
+import { Routes } from 'routes';
+
 const App = () => {
-  return <div>AEPB</div>;
+  return <Routes />;
 };
 
 export default App;
