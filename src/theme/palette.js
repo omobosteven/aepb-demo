@@ -39,7 +39,6 @@ const ERROR = {
 
 const GREY = {
   disabled: '#E7E7ED',
-  innerBorder: '#C8C6C4',
   light: '#F3F2F1',
   dashedBorder: '#EDEBE9'
 };
@@ -58,10 +57,16 @@ const COMMON = {
 const palette = {
   ...COMMON,
   text: {
-    primary: '#201F1E',
-    secondary: '#605E5C',
+    primary: '#3F415B',
+    secondary: '#393A4A',
     disabled: '#A7A9BC',
-    tertiary: '#323130'
+    tertiary: '#6B6C7E',
+    pageTitle: '#1E0A3C'
+  },
+  border: {
+    secondary: '#ADB0CC',
+    primary: '#CDCED9',
+    tertiary: '#EDEDED'
   },
   background: {
     paper: '#fff',
