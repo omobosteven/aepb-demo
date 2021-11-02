@@ -6,6 +6,7 @@ import logo from 'assets/logo-text.svg';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Grid, Typography } from '@mui/material';
+import { AuthPaths } from 'routes/paths';
 
 const HomePage = () => {
   const classes = useStyles();
@@ -22,7 +23,7 @@ const HomePage = () => {
             Login
           </Link>
 
-          <Link className="link regLink" to="/register">
+          <Link className="link regLink" to={AuthPaths.REGISTER}>
             Register
           </Link>
         </div>

@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import StyledEngineProvider from '@mui/material/StyledEngineProvider';
 
 import palette from './palette';
 import typography from './typography';
@@ -23,10 +24,12 @@ export default function ThemeConfig({ children }) {
   theme.components = componentsOverride(theme);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 

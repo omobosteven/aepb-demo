@@ -8,8 +8,11 @@ export default function Button(theme) {
       },
       styleOverrides: {
         root: {
+          padding: '8px 16px',
+          boxShadow: 'none',
+          textTransform: 'capitalize',
           fontWeight: 400,
-          borderRadius: '2px',
+          borderRadius: 8,
           '&:hover': {
             boxShadow: 'none'
           }
@@ -21,12 +24,16 @@ export default function Button(theme) {
           height: 44
         },
         containedPrimary: {
-          boxShadow: 'none',
-          '&:hover': {
-            backgroundColor: theme.palette.primary.light
-          },
-          '&:active': {
+          color: theme.palette.secondary.main,
+          '&:hover, &:active': {
             backgroundColor: theme.palette.primary.dark
+          }
+        },
+        containedSecondary: {
+          backgroundColor: theme.palette.secondary.light,
+          color: theme.palette.primary.main,
+          '&:hover, &:active': {
+            backgroundColor: theme.palette.secondary.main
           }
         },
         containedInherit: {
