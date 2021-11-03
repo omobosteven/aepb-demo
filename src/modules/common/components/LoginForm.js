@@ -12,20 +12,12 @@ export const LoginForm = () => {
   const classes = useStyles();
   const history = useHistory();
 
-  const schema = yup.object().shape({
-    email: yup
-      .string()
-      .required('Email is required')
-      .email('Email must be a valid email'),
-    password: yup.string().required('Password is required')
-  });
-
   const {
     register,
     formState: { errors },
     handleSubmit
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validationSchema),
     mode: 'onSubmit'
   });
 
@@ -80,3 +72,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 8
   }
 }));
+
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .required('Email is required')
+    .email('Email must be a valid email'),
+  password: yup.string().required('Password is required')
+});
