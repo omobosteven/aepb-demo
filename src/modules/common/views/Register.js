@@ -37,26 +37,31 @@ const Register = () => {
 
   return (
     <div className={classes.root}>
-      <Typography component="h1" className={classes.heading}>
-        Register Your Account
-      </Typography>
-      <div className={classes.form}>
-        {signupStep === 1 && (
-          <RegistrationForm
-            onSubmit={handleRegistrationSubmit}
-            defaultValues={userData}
-          />
-        )}
-        {signupStep === 2 && (
-          <PreviewInfo
-            data={userData}
-            onSubmit={onSubmit}
-            onCancel={backToForm}
-            isSubmitting={false}
-          />
-        )}
-        {signupStep === 3 && <RegistrationSuccess />}
-      </div>
+      {signupStep === 3 ? (
+        <RegistrationSuccess />
+      ) : (
+        <>
+          <Typography component="h1" className={classes.heading}>
+            Register Your Account
+          </Typography>
+          <div className={classes.form}>
+            {signupStep === 1 && (
+              <RegistrationForm
+                onSubmit={handleRegistrationSubmit}
+                defaultValues={userData}
+              />
+            )}
+            {signupStep === 2 && (
+              <PreviewInfo
+                data={userData}
+                onSubmit={onSubmit}
+                onCancel={backToForm}
+                isSubmitting={false}
+              />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
@@ -75,10 +80,17 @@ const useStyles = makeStyles((theme) => ({
   },
 
   form: {
-    width: 588,
-    maxWidth: '100%',
+    maxWidth: 588,
+    width: '100%',
     margin: 'auto',
     marginBottom: 50
+  },
+
+  '@media screen and (max-width: 600px)': {
+    root: {
+      paddingLeft: 16,
+      paddingRight: 16
+    }
   }
 }));
 

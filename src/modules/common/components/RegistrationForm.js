@@ -170,7 +170,7 @@ RegistrationForm.propTypes = {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: '100%',
+    // width: '100%',
 
     '& .MuiGrid-item': {
       paddingTop: 0

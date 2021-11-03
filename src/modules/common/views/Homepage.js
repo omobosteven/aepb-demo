@@ -2,10 +2,10 @@ import React from 'react';
 import bgImage from 'assets/homeBckGround.svg';
 import mapBackground from 'assets/mapBckgrd.svg';
 import wasteMgt from 'assets/waste.svg';
-import logo from 'assets/logo-text.svg';
+import { ReactComponent as Logo } from 'assets/logo-text.svg';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
-import { Grid, Typography } from '@mui/material';
+import { Grid, SvgIcon, Typography } from '@mui/material';
 import { AuthPaths } from 'routes/paths';
 
 const HomePage = () => {
@@ -15,7 +15,7 @@ const HomePage = () => {
     <section className={classes.homepage}>
       <header className="header">
         <div className="headerLogo">
-          <img src={logo} alt="logo.svg" />
+          <SvgIcon component={Logo} viewBox="0 0 107 55" />
         </div>
 
         <div className="headerLinks">
@@ -68,6 +68,14 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between'
+    },
+
+    '& .header .headerLogo': {
+      '& .MuiSvgIcon-root': {
+        fontSize: 107,
+        height: 'auto',
+        fill: theme.palette.common.white
+      }
     },
 
     '& .header .headerLinks': {

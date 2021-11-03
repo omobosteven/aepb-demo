@@ -61,6 +61,7 @@ const palette = {
     secondary: '#393A4A',
     disabled: '#A7A9BC',
     tertiary: '#6B6C7E',
+    title: '#6B6D7E',
     pageTitle: '#1E0A3C'
   },
   border: {

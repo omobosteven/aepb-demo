@@ -1,12 +1,13 @@
 export const CssBaseline = () => {
   return {
     MuiCssBaseline: {
-      '@global': {
+      styleOverrides: {
         html: {
-          fontSize: '62.5%'
+          height: '100vh'
         },
         body: {
-          backgroundColor: '#F5F8FA'
+          backgroundColor: '#F5F8FA',
+          height: '100%'
         }
       }
     }

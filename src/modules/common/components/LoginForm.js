@@ -1,29 +1,15 @@
-/* eslint-disable */
-import {
-  IconButton,
-  InputAdornment,
-  Typography,
-  Container,
-  Button,
-  Link
-} from '@mui/material';
+import { Container, Button, Link } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { TextField } from 'reusables';
-// import authServices from 'services/auth';
-// import Auth from 'utils/Auth';
 import { useHistory } from 'react-router-dom';
-import { CustomerPaths, AdminPaths } from 'routes/paths';
-// import { PrivatePaths as CustomersPath } from 'routes/CustomerRoutes';
-// import { PrivatePaths as AdminPaths } from 'routes/AdminRoutes';
-// import handleReactQueryError from 'utils/handleReactQueryError';
+import { CustomerPaths } from 'routes/paths';
 
 export const LoginForm = () => {
   const classes = useStyles();
-  const [showPassword, setShowPassword] = useState(false);
   const history = useHistory();
 
   const schema = yup.object().shape({
@@ -43,26 +29,11 @@ export const LoginForm = () => {
     mode: 'onSubmit'
   });
 
-  // const { mutate, isLoading } = useMutation(authServices.login, {
-  //   onError: (error) => {
-  //     handleReactQueryError('Login failed', error);
-  //   },
-  //   onSuccess: ({ data }) => {
-  //     Auth.setToken(data?.accessToken);
-  //     if (data?.role === 'Customer') history.push(CustomersPath.PAYMENTS);
-  //     else history.push(AdminPaths.CUSTOMERS);
-  //   }
-  // });
-
   const handleLogIn = (data) => {
     console.log({ data });
     history.push(CustomerPaths.PAYMENTS);
     // mutate(data);
   };
-
-  const handleClickShowPassword = () => setShowPassword(!showPassword);
-
-  const handleMouseDownPassword = (event) => event.preventDefault();
 
   return (
     <Container component="main" maxWidth="md" classes={{ root: classes.container }}>
@@ -80,7 +51,7 @@ export const LoginForm = () => {
           name="password"
           label="Password"
         />
-        <Link className={classes.link} underline="none" href="#">
+        <Link className={classes.link} underline="none" href="/login">
           Forgot Password?
         </Link>
         <div className={classes.btnWrapper}>
