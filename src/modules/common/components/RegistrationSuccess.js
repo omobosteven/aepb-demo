@@ -1,6 +1,8 @@
 import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import successTick from 'assets/success-tick.gif';
+import { Link } from 'react-router-dom';
+import React from 'react';
 
 export const RegistrationSuccess = () => {
   const classes = useStyles();
@@ -8,11 +10,14 @@ export const RegistrationSuccess = () => {
     <div className={classes.wrapper}>
       <div className={classes.root}>
         <img src={successTick} alt="success tick" />
-        <Typography>Congratulations</Typography>
-        <p>
+        <Typography className="completionTitle">Congratulations</Typography>
+        <Typography className="completionText">
           We have received your information and it will be reviewed. We will reach out to
           you via email on the next steps.
-        </p>
+        </Typography>
+        <Link className="link" to="/login" underline="none">
+          Login
+        </Link>
       </div>
     </div>
   );
@@ -24,31 +29,36 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     top: 0,
     left: 0,
-    width: '100vw',
-    height: '100vh'
+    height: '100vh',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   root: {
-    background: 'white',
     '& img': {
       height: 96,
       width: 96
     },
-    width: 465,
+    width: '100%',
+    maxWidth: 465,
     minHeight: 233,
     textAlign: 'center',
     margin: 'auto',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    '& :nth-child(2)': {
+
+    '& .completionTitle': {
       fontSize: 32,
       fontWeight: 500,
       color: '#272833'
     },
-    '& :nth-child(3)': {
+    '& .completionText': {
       fontSize: 16,
-      color: theme.palette.text.tertiary
+      color: theme.palette.text.tertiary,
+      wordBreak: 'break-word'
+    },
+
+    '& .link': {
+      color: theme.palette.primary.main
     }
   }
 }));
