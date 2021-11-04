@@ -78,9 +78,15 @@ AppBar.defaultProps = {
 const NavBar = styled(MuiAppBar)(({ theme }) => ({
   backgroundColor: theme.palette.common.white,
   color: theme.palette.text.tertiary,
+  height: 65,
   boxShadow: 'none',
   paddingTop: 8,
   paddingBottom: 8,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  // border: '1px solid red',
 
   '& .container': {
     display: 'flex',
@@ -116,7 +122,8 @@ const NavBar = styled(MuiAppBar)(({ theme }) => ({
       fontSize: 18,
       fontWeight: 700,
       marginLeft: 25,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      lineHeight: 1.5
     }
   }
 }));

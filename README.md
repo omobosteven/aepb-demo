@@ -3,7 +3,7 @@ Provides location base waste management capabilities.
 [https://aepb-demo.netlify.app](https://aepb-demo.netlify.app)
 
 - The application uses dummy/mock data at the moment.
-- The admin portal will be added
+- use admin@mail.com to login as an admin.
 
 ## Technologies
 - [React](https://reactjs.org)

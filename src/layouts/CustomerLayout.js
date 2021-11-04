@@ -18,12 +18,9 @@ CustomerLayout.propTypes = {
 
 const Offset = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
-
-  '@media screen and (min-width: 600px)': {
-    minHeight: 71
-  }
 }));
 
 const Content = styled('div')({
-  paddingTop: 32
+  paddingTop: 32,
+  paddingBottom: 64
 });
