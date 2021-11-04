@@ -4,6 +4,7 @@ import { routes } from './app-routes';
 
 const renderRoute = ({ component: Component, ...route }) => {
   const Layout = route.layout ? route.layout : Fragment;
+
   return (
     <Route
       key={route.path}
@@ -20,13 +21,12 @@ const renderRoute = ({ component: Component, ...route }) => {
   );
 };
 
-const AllRoutes = () => routes.map((route) => renderRoute(route));
 
 export const Routes = () => {
   return (
     <Router>
       <Switch>
-        <AllRoutes />
+        {routes.map((route) => renderRoute(route))}
       </Switch>
     </Router>
   );

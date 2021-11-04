@@ -14,7 +14,7 @@ export const SideBar = withRouter(({ history, location }) => {
   const classes = useStyles();
 
   const getSelectedKey = (pathname = location.pathname) => {
-    return pathname?.split('/')?.[1];
+    return pathname?.split('/')?.[2];
   };
 
   return (

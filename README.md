@@ -2,9 +2,6 @@
 Provides location base waste management capabilities.
 [https://aepb-demo.netlify.app](https://aepb-demo.netlify.app)
 
-- The application uses dummy/mock data at the moment.
-- use admin@mail.com to login as an admin.
-
 ## Technologies
 - [React](https://reactjs.org)
 - [Material-UI](https://mui.com): as UI Component library.
@@ -20,6 +17,10 @@ Provides location base waste management capabilities.
 
 
 **N/B**
+- The application uses dummy/mock data at the moment.
+- use any valid email to login as a customer
+- use admin@mail.com to login as an admin.
+
 ## Available Scripts
 
 In the project directory, you can run:

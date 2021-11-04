@@ -49,11 +49,11 @@ const columns = [
     flex: 0.7,
     minWidth: 60,
     disableColumnMenu: true,
-    renderCell: ({ id, row: { status } }) => {
+    renderCell: ({ row: { status } }) => {
       return (
         <ActionButton
           disabled={['failed', 'pending'].includes(status?.toLowerCase())}
-          onClick={() => console.log(id)}
+          // onClick={() => console.log(id)}
           type="button"
           startIcon={
             <ViewIcon

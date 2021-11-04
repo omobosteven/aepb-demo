@@ -8,8 +8,8 @@ export const CustomerPaths = {
 };
 
 export const AdminPaths = {
-  CUSTOMERS: '/customers',
-  BILLINGS: '/billings',
-  TRUCKS: '/trucks',
-  SETTINGS: '/settings'
+  CUSTOMERS: '/admin/customers',
+  BILLINGS: '/admin/billings',
+  TRUCKS: '/admin/trucks',
+  SETTINGS: '/admin/settings'
 };

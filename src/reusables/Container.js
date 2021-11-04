@@ -5,5 +5,6 @@ export const Container = ({ children, ...rest }) => {
 };
 
 const StyledContainer = styled(MuiContainer)({
+  height: '100%',
   maxWidth: 1360
 });
