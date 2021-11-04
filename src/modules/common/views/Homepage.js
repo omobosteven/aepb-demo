@@ -1,5 +1,4 @@
 import React from 'react';
-import bgImage from 'assets/homeBckGround.svg';
 import mapBackground from 'assets/mapBckgrd.svg';
 import wasteMgt from 'assets/waste.svg';
 import { ReactComponent as Logo } from 'assets/logo-text.svg';
@@ -58,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   homepage: {
     width: '100%',
     minHeight: '100vh',
-    background: `url(${bgImage})`,
+    background: `url(https://res.cloudinary.com/dxrgcekjd/image/upload/v1636037581/homeBackground_hraeou.png)`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     padding: '15px 6.8% 10px',
