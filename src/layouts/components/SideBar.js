@@ -1,14 +1,20 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { makeStyles, Drawer, Tabs, Tab, SvgIcon } from '@mui/material';
-import Logo from 'assets/logo-text.svg';
+import { Drawer, Tabs, Tab, SvgIcon } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import { ReactComponent as Logo } from 'assets/logo-text.svg';
+import { ReactComponent as CustomerIcon } from 'assets/barIcons/customers.svg';
+import { ReactComponent as BillingIcon } from 'assets/barIcons/billing.svg';
+import { ReactComponent as TrucksIcon } from 'assets/barIcons/delivery-truck.svg';
+import { ReactComponent as SettingIcon } from 'assets/barIcons/settings.svg';
 import { ReactComponent as LogoutIcon } from 'assets/barIcons/logout.svg';
+import { AdminPaths } from 'routes/paths';
 
-export const SideBar = withRouter(({ history, location, menuTabs }) => {
+export const SideBar = withRouter(({ history, location }) => {
   const classes = useStyles();
 
   const getSelectedKey = (pathname = location.pathname) => {
-    return pathname?.split('/')?.[2];
+    return pathname?.split('/')?.[1];
   };
 
   return (
@@ -19,7 +25,7 @@ export const SideBar = withRouter(({ history, location, menuTabs }) => {
       classes={{ paper: classes.drawerPaper }}
     >
       <div className="logo">
-        <img src={Logo} alt="logo" className="logoImage" />
+        <SvgIcon component={Logo} viewBox="0 0 107 55" />
       </div>
       <Tabs
         orientation="vertical"
@@ -27,13 +33,13 @@ export const SideBar = withRouter(({ history, location, menuTabs }) => {
         variant="fullWidth"
         value={getSelectedKey()}
       >
-        {menuTabs.map((tab) => {
+        {MenuItems?.map((tab) => {
           return (
             <Tab
               onClick={() => history.push(tab.path)}
               value={getSelectedKey(tab.path)}
               key={tab.path}
-              label={tab.label}
+              label={<span>{tab.label}</span>}
               icon={
                 <SvgIcon component={tab.icon} viewBox="0 0 24 24" fontSize="inherit" />
               }
@@ -62,14 +68,20 @@ const useStyles = makeStyles((theme) => ({
 
     '& .logo': {
       marginTop: 25,
-      marginBottom: 20,
       display: 'flex',
       alignItems: 'center',
-      alignSelf: 'center'
+      alignSelf: 'center',
+
+      '& .MuiSvgIcon-root': {
+        fontSize: 107,
+        height: 'auto',
+        fill: theme.palette.common.white
+      }
     }
   },
 
   tabs: {
+    marginTop: 24,
     '& .MuiTabs-indicator': {
       display: 'none'
     },
@@ -87,22 +99,20 @@ const useStyles = makeStyles((theme) => ({
         width: '90%',
         padding: '10px 10px 10px 25px',
         opacity: 1,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
 
-        '& .MuiTab-wrapper': {
-          alignItems: 'center',
-          flexDirection: 'row',
-          justifyContent: 'flex-start',
+        '& .MuiSvgIcon-root': {
+          marginRight: 14,
+          fontSize: 24,
+          fill: 'transparent',
+          stroke: theme.palette.primary.light
+        },
 
-          '& > *:first-child': {
-            marginBottom: 0
-          },
-
-          '& .MuiSvgIcon-root': {
-            marginRight: 14,
-            fontSize: 24,
-            fill: 'transparent',
-            stroke: theme.palette.primary.light
-          }
+        '& > *:first-child': {
+          marginBottom: 0
         },
 
         '&.Mui-selected': {
@@ -110,10 +120,8 @@ const useStyles = makeStyles((theme) => ({
           borderRadius: 8,
           color: theme.palette.primary.main,
 
-          '& .MuiTab-wrapper': {
-            '& .MuiSvgIcon-root': {
-              stroke: theme.palette.primary.main
-            }
+          '& .MuiSvgIcon-root': {
+            stroke: theme.palette.primary.main
           }
         }
       }
@@ -143,3 +151,26 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }));
+
+const MenuItems = [
+  {
+    label: 'Customers',
+    path: AdminPaths.CUSTOMERS,
+    icon: CustomerIcon,
+  },
+  {
+    label: 'Billing',
+    path: AdminPaths.BILLINGS,
+    icon: BillingIcon,
+  },
+  {
+    label: 'Trucks',
+    path: AdminPaths.TRUCKS,
+    icon: TrucksIcon,
+  },
+  {
+    label: 'Settings',
+    path: AdminPaths.SETTINGS,
+    icon: SettingIcon,
+  },
+];

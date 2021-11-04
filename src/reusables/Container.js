@@ -5,5 +5,5 @@ export const Container = ({ children, ...rest }) => {
 };
 
 const StyledContainer = styled(MuiContainer)({
-  maxWidth: 1440
+  maxWidth: 1360
 });

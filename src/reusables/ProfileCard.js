@@ -1,5 +1,5 @@
 import React from 'react';
-import { SvgIcon } from '@mui/material';
+import { SvgIcon, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import { ReactComponent as UserIcon } from 'assets/profileInfoIcons/user.svg';
@@ -9,15 +9,11 @@ import { ReactComponent as EmailIcon } from 'assets/profileInfoIcons/email.svg';
 import { ReactComponent as FrequencyIcon } from 'assets/profileInfoIcons/calendar.svg';
 import { ReactComponent as HouseIcon } from 'assets/profileInfoIcons/house.svg';
 import { ReactComponent as OccupantsIcon } from 'assets/profileInfoIcons/occupants.svg';
-import { ReactComponent as OwnershipIcon } from 'assets/profileInfoIcons/user-settngs.svg';
 import { ReactComponent as PhoneIcon } from 'assets/profileInfoIcons/phone-actions-call.svg';
 
-//  Reuseable component for profile information card across the app,
-//  you can pass in a "vertical" prop to make the card content be vertical
-//  even if there's space to expand around it
 
-export const ProfileCard = ({ vertical = false }) => {
-  const classes = useStyles({ vertical });
+export const ProfileCard = () => {
+  const classes = useStyles();
 
   const profileDetails = [
     {
@@ -41,11 +37,6 @@ export const ProfileCard = ({ vertical = false }) => {
       value: 'example@mail.com'
     },
     {
-      icon: OwnershipIcon,
-      key: 'Ownership type',
-      value: 'Landlord'
-    },
-    {
       icon: HouseIcon,
       key: 'House type',
       value: 'Duplex'
@@ -64,61 +55,55 @@ export const ProfileCard = ({ vertical = false }) => {
       icon: AddressIcon,
       key: 'Address',
       value: '1, Ziquinchor Street, Off IBB Way, Wuse Zone 4.'
-    }
+    },
   ];
 
   return (
     <div className={classes.cardWrapper}>
       <div className="title">Profile Information</div>
-      <div className={classes.profileInfo}>
+      <Grid container spacing={2} className={classes.profileInfo}>
         {profileDetails.map((content) => (
-          <div key={content.key} className="info-detail">
-            <div className="icon">
-              <SvgIcon component={content.icon} viewBox="0 0 24 24" fontSize="inherit" />
-            </div>
+          <Grid item xs={12} md={3} key={content.key} className="info-detail">
+            <SvgIcon component={content.icon} viewBox="0 0 24 24" fontSize="inherit" />
             <div className="content">
               <div className="key">{content.key}</div>
               <div className="value">{content.value}</div>
             </div>
-          </div>
+          </Grid>
         ))}
-      </div>
+      </Grid>
     </div>
   );
 };
 
 const useStyles = makeStyles((theme) => ({
-  cardWrapper: ({ vertical }) => ({
+  cardWrapper: {
     background: theme.palette.primary.light,
     padding: 24,
     borderRadius: 8,
     minHeight: 200,
-    maxWidth: vertical && 280,
+
     '& .title': {
       fontSize: 20,
       color: theme.palette.text.pageTitle,
-      // marginBottom: 24,
       fontWeight: 500
     }
-  }),
-  profileInfo: ({ vertical }) => ({
+  },
+
+  profileInfo: {
     display: 'flex',
-    flexWrap: 'wrap',
 
     '& .info-detail': {
       display: 'flex',
       alignItems: 'center',
       marginTop: 16,
-      // marginRight: !vertical && 100,
-      minWidth: !vertical && 250,
-      '& .icon': {
-        flexShrink: 0,
+
+      '& .MuiSvgIcon-root': {
         fontSize: 24,
-        '& .MuiSvgIcon-root': {
-          fill: 'transparent',
-          stroke: theme.palette.primary.main
-        }
+        fill: 'transparent',
+        stroke: theme.palette.primary.main
       },
+
       '& .content': {
         marginLeft: 18,
         '& .key': {
@@ -131,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
           fontWeight: 500,
           wordBreak: 'break-word'
         }
-      }
+      },
     }
-  })
+  },
 }));

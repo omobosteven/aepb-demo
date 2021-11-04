@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { TextField } from 'reusables';
 import { useHistory } from 'react-router-dom';
-import { CustomerPaths } from 'routes/paths';
+import { CustomerPaths, AdminPaths } from 'routes/paths';
 
 export const LoginForm = () => {
   const classes = useStyles();
@@ -23,8 +23,11 @@ export const LoginForm = () => {
 
   const handleLogIn = (data) => {
     console.log({ data });
-    history.push(CustomerPaths.PAYMENTS);
-    // mutate(data);
+    if (data.email === 'admin@mail.com') {
+      history.push(AdminPaths.CUSTOMERS);
+    } else {
+      history.push(CustomerPaths.PAYMENTS);
+    }
   };
 
   return (

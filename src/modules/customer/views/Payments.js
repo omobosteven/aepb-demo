@@ -84,10 +84,10 @@ const Payments = () => {
     <section className={classes.customerSection}>
       <Container>
         <Grid container spacing={3}>
-          <Grid item>
-            <ProfileCard vertical />
+          <Grid item xs={12}>
+            <ProfileCard />
           </Grid>
-          <Grid item xs>
+          <Grid item xs={12} className={classes.tableContainer}>
             <Table
               title="Payment History"
               rows={paymentData}
@@ -103,7 +103,12 @@ const Payments = () => {
 };
 
 const useStyles = makeStyles({
-  customerSection: {}
+  customerSection: {
+  },
+
+  tableContainer: {
+    overflowX: 'auto'
+  }
 });
 
 export default Payments;
