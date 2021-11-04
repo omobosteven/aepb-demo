@@ -7,7 +7,11 @@ export const CssBaseline = () => {
         },
         body: {
           backgroundColor: '#F5F8FA',
-          height: '100%'
+          height: '100%',
+
+          '& #root': {
+            height: '100%'
+          }
         }
       }
     }

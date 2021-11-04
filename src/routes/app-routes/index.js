@@ -11,5 +11,9 @@ export const routes = [
   },
   ...authRoutes,
   ...customerRoutes,
-  ...adminRoutes
+  ...adminRoutes,
+  {
+    path: '*',
+    component: lazy(() => import('modules/common/views/PageNotFound')),
+  },
 ];
