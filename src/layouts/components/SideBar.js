@@ -1,6 +1,7 @@
+/* eslint-disable */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { Drawer, Tabs, Tab, SvgIcon } from '@mui/material';
+import { Drawer, Tabs, Tab, SvgIcon, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { ReactComponent as Logo } from 'assets/logo-text.svg';
 import { ReactComponent as CustomerIcon } from 'assets/barIcons/customers.svg';
@@ -10,12 +11,14 @@ import { ReactComponent as SettingIcon } from 'assets/barIcons/settings.svg';
 import { ReactComponent as LogoutIcon } from 'assets/barIcons/logout.svg';
 import { AdminPaths } from 'routes/paths';
 
-export const SideBar = withRouter(({ history, location }) => {
-  const classes = useStyles();
+export const SideBar = withRouter(({ history, location, width }) => {
+  const classes = useStyles({ width });
 
   const getSelectedKey = (pathname = location.pathname) => {
     return pathname?.split('/')?.[2];
   };
+
+  const handleLogout = () => history.push('/');
 
   return (
     <Drawer
@@ -47,21 +50,21 @@ export const SideBar = withRouter(({ history, location }) => {
           );
         })}
       </Tabs>
-      <span className={classes.logout}>
+      <Button className={classes.logout} onClick={handleLogout} color="primary">
         <SvgIcon component={LogoutIcon} viewBox="0 0 24 24" fontSize="inherit" />
         Logout
-      </span>
+      </Button>
     </Drawer>
   );
 });
 
 const useStyles = makeStyles((theme) => ({
   drawerRoot: {
-    width: 200
+    width: ({ width }) => width,
   },
 
   drawerPaper: {
-    width: 200,
+    width: ({ width }) => width,
     borderRight: 'none',
     background: theme.palette.primary.main,
     boxShadow: '0px 3px 6px rgba(0, 0, 0, 0.1)',
@@ -106,7 +109,7 @@ const useStyles = makeStyles((theme) => ({
 
         '& .MuiSvgIcon-root': {
           marginRight: 14,
-          fontSize: 24,
+          fontSize: 20,
           fill: 'transparent',
           stroke: theme.palette.primary.light
         },
@@ -131,17 +134,10 @@ const useStyles = makeStyles((theme) => ({
   logout: {
     color: theme.palette.primary.light,
     fontSize: 14,
-    textTransform: 'capitalize',
     fontWeight: 400,
-    minHeight: 40,
     marginBottom: 10,
-    width: '90%',
-    padding: '10px 10px 10px 25px',
     position: 'absolute',
     bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    cursor: 'pointer',
 
     '& .MuiSvgIcon-root': {
       marginRight: 14,

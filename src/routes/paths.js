@@ -9,6 +9,7 @@ export const CustomerPaths = {
 
 export const AdminPaths = {
   CUSTOMERS: '/admin/customers',
+  CUSTOMER: '/admin/customers/:id',
   BILLINGS: '/admin/billings',
   TRUCKS: '/admin/trucks',
   SETTINGS: '/admin/settings'

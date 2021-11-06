@@ -14,7 +14,7 @@ import { Container } from 'reusables';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export const AppBar = ({ showLogo }) => {
+export const AppBar = ({ showLogo, widthSubtraction, fullWidth, isAdmin }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
 
@@ -29,7 +29,7 @@ export const AppBar = ({ showLogo }) => {
   const handleLogout = () => history.push('/');
 
   return (
-    <NavBar position="fixed" elevation={0}>
+    <NavBar position="fixed" elevation={0} widthSubtraction={widthSubtraction} fullWidth={fullWidth} isAdmin={isAdmin}>
       <Container className="container">
         {showLogo && (
           <div className="logo">
@@ -68,65 +68,78 @@ export const AppBar = ({ showLogo }) => {
 };
 
 AppBar.propTypes = {
-  showLogo: PropTypes.bool
+  showLogo: PropTypes.bool,
+  widthSubtraction: PropTypes.number,
+  isAdmin: PropTypes.bool,
+  fullWidth: PropTypes.bool
 };
 
 AppBar.defaultProps = {
-  showLogo: false
+  showLogo: false,
+  fullWidth: false,
+  widthSubtraction: 0,
+  isAdmin: false
 };
 
-const NavBar = styled(MuiAppBar)(({ theme }) => ({
-  backgroundColor: theme.palette.common.white,
-  color: theme.palette.text.tertiary,
-  height: 65,
-  boxShadow: 'none',
-  paddingTop: 8,
-  paddingBottom: 8,
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  // border: '1px solid red',
-
-  '& .container': {
+const NavBar = styled(MuiAppBar, {
+  shouldForwardProp: (propName) => !['widthSubtraction', 'fullWidth', 'isAdmin'].includes(propName)
+})(({ theme, widthSubtraction, fullWidth, isAdmin }) => ({
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.text.tertiary,
+    height: 65,
+    boxShadow: 'none',
+    paddingTop: 8,
+    paddingBottom: 8,
     display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
-    paddingLeft: '6.8%',
-    paddingRight: '6.8%'
-  },
+    width: fullWidth ? '100%' : `calc(100% - ${widthSubtraction ?? 0}px)`,
 
-  '& .logo': {
-    display: 'flex',
-    alignItems: 'center',
-
-    '& .MuiSvgIcon-root': {
-      fontSize: 107,
-      height: 'auto',
-      fill: theme.palette.text.primary
-    }
-  },
-
-  '& .notification': {
-    display: 'flex',
-    alignItems: 'center',
-    marginLeft: 'auto',
-
-    '& .badgeRoot': {
-      fontSize: 20,
-      cursor: 'pointer'
+    '& .container': {
+      display: 'flex',
+      alignItems: 'center',
+      paddingLeft: '6.8%',
+      paddingRight: '6.8%',
+      ...(isAdmin && {
+        paddingLeft: 24,
+        paddingRight: 24,
+        maxWidth: '100%'
+      })
     },
 
-    '& .MuiAvatar-root': {
-      background: theme.palette.secondary.dark,
-      color: theme.palette.common.white,
-      fontSize: 18,
-      fontWeight: 700,
-      marginLeft: 25,
-      cursor: 'pointer',
-      lineHeight: 1.5
+    '& .logo': {
+      display: 'flex',
+      alignItems: 'center',
+
+      '& .MuiSvgIcon-root': {
+        fontSize: 107,
+        height: 'auto',
+        fill: theme.palette.text.primary
+      }
+    },
+
+    '& .notification': {
+      display: 'flex',
+      alignItems: 'center',
+      marginLeft: 'auto',
+
+      '& .badgeRoot': {
+        fontSize: 20,
+        cursor: 'pointer'
+      },
+
+      '& .MuiAvatar-root': {
+        background: theme.palette.secondary.dark,
+        color: theme.palette.common.white,
+        fontSize: 18,
+        fontWeight: 700,
+        marginLeft: 25,
+        cursor: 'pointer',
+        lineHeight: 1.5
+      }
     }
-  }
-}));
+  }));
 
 const StyledMenu = styled(Menu)(({ theme }) => ({
   '& .MuiList-root': {
