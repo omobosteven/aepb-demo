@@ -10,6 +10,12 @@ export const adminRoutes = [
     layout: AdminLayout
   },
   {
+    path: AdminPaths.CUSTOMER,
+    exact: true,
+    component: lazy(() => import('modules/admin/views/Customer')),
+    layout: AdminLayout
+  },
+  {
     path: AdminPaths.BILLINGS,
     exact: true,
     component: lazy(() => import('modules/admin/views/Billings')),
