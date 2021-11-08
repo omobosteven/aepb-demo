@@ -1,7 +1,8 @@
 import { makeStyles } from '@mui/styles';
 import { Table, TableChip, Container, AdminHeader } from 'reusables';
 import { datatype, name, helpers } from 'faker';
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
+import { useTableParams } from 'hooks';
 import { useHistory } from 'react-router-dom';
 
 const columns = [
@@ -37,13 +38,7 @@ const columns = [
 ];
 
 const Customers = () => {
-  const [tableParams, setTableParams] = useState({
-    search: '',
-    sort: '',
-    pageSize: 10,
-    page: 1,
-    total: 10
-  });
+  const [tableParams, setTableParams] = useTableParams();
   const history = useHistory();
   const classes = useStyles();
 

@@ -22,7 +22,7 @@ const Register = () => {
     // eslint-disable-next-line no-unused-vars
     const payload = {
       ...userData,
-      houseType: parseInt(userData.houseType, 20),
+      houseType: parseInt(userData.houseType, 10),
       state: 'FCT',
       estimatedBill
     };
