@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { paymentServices } from 'services/paymentServices';
 import { toast } from 'react-hot-toast';
+import { useTableParams } from 'hooks';
 import { ProfileCard } from './ProfileCard';
 
 const ViewIcon = ({ component, ...rest }) => (
@@ -76,11 +77,7 @@ const columns = [
 export const CustomerPayments = () => {
   const classes = useStyles();
   const [tableData, setTableData] = useState([]);
-  const [tableParams, setTableParams] = useState({
-    search: '',
-    pageSize: 10,
-    page: 1
-  });
+  const [tableParams, setTableParams] = useTableParams();
 
   const { isLoading, isFetching } = useQuery(
     ['payments', tableParams],
@@ -93,10 +90,10 @@ export const CustomerPayments = () => {
         }));
 
         setTableData(flattenData);
-        setTableParams({
-          ...tableParams,
+        setTableParams((prevState) => ({
+          ...prevState,
           ...meta.pagination
-        });
+        }));
       },
       onError: (error) => {
         toast.error(error.message);

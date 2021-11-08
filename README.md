@@ -23,14 +23,14 @@ Provides location base waste management capabilities.
 - use admin@mail.com to login as an admin.
 
 ## Environment variables
-- `REACT_APP_BASE_API_URL`: https://aepb-api.herokuapp.com/api.
+- `REACT_APP_BASE_API_URL`: https://aepb-app.herokuapp.com/api.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
 - Create a .env file with the following content:
-  - `REACT_APP_BASE_API_URL=https://aepb-api.herokuapp.com/api`
+  - `REACT_APP_BASE_API_URL=https://aepb-app.herokuapp.com/api`
 
 ### `yarn start`
 
