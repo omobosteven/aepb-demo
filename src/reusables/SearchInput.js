@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 export const SearchInput = ({ value, onChange, ...rest }) => {
   return (
     <StyledSearch
-      type="search"
       placeholder="Search"
       fullWidth
       InputProps={{

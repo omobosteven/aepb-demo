@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, RadioButton, SelectInput } from 'reusables';
+import { TextField, RadioButton, ControlSelectInput as SelectInput } from 'reusables';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
@@ -23,7 +23,6 @@ export const RegistrationForm = ({ onSubmit, defaultValues, ...rest }) => {
     defaultValues,
     resolver: yupResolver(validationSchema)
   });
-
 
   const classes = useStyles();
 
@@ -112,12 +111,7 @@ export const RegistrationForm = ({ onSubmit, defaultValues, ...rest }) => {
         </Grid>
 
         <Grid item xs={12}>
-          <TextField
-            errors={errors}
-            register={register}
-            name="address"
-            label="Address"
-          />
+          <TextField errors={errors} register={register} name="address" label="Address" />
         </Grid>
 
         <Grid item xs={12} md={6}>
@@ -163,7 +157,7 @@ RegistrationForm.propTypes = {
 
 RegistrationForm.defaultProps = {
   defaultValues: {}
-}
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -198,13 +192,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required('First Name is required'),
   lastName: Yup.string().required('last Name is required'),
-  phoneNumber: Yup.string().required('Phone is required').matches(/^[0]\d{10}$/, 'Enter a valid phone number 070...'),
+  phoneNumber: Yup.string()
+    .required('Phone is required')
+    .matches(/^[0]\d{10}$/, 'Enter a valid phone number 070...'),
   email: Yup.string().required('Email is required').email('Enter a valid Email'),
-  password: Yup.string().required('Password is required').min(8, 'Password length is less than 8 characters'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password length is less than 8 characters'),
   houseType: Yup.string().required('Select a house type'),
   noOfOccupants: Yup.string().required('Select number of occupants'),
   pickupFrequency: Yup.string().required('Select pickup frequency'),

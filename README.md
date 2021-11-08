@@ -4,7 +4,8 @@ Provides location base waste management capabilities.
 
 ## Technologies
 - [React](https://reactjs.org)
-- [Material-UI](https://mui.com): as UI Component library.
+- [Material-UI](https://mui.com)
+- [ReactQuery](https://reactquery.dev)
 
 ## The folder structure of the src directory of the project is as follows:<br/>
 
@@ -21,9 +22,15 @@ Provides location base waste management capabilities.
 - use any valid email to login as a customer
 - use admin@mail.com to login as an admin.
 
+## Environment variables
+- `REACT_APP_BASE_API_URL`: https://aepb-api.herokuapp.com/api.
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+- Create a .env file with the following content:
+  - `REACT_APP_BASE_API_URL=https://aepb-api.herokuapp.com/api`
 
 ### `yarn start`
 

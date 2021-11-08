@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { Pagination } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useGridApiContext, useGridState } from '@mui/x-data-grid';
