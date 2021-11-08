@@ -10,7 +10,7 @@ const columns = [
     field: 'name',
     disableColumnMenu: true,
     minWidth: 60,
-    flex: 1,
+    flex: 1
   },
   {
     headerName: 'House Type',
@@ -28,46 +28,52 @@ const columns = [
       const chipMapping = {
         verified: 'success',
         unverified: 'info'
-      }
-      return <TableChip text={value} color={chipMapping[value?.toLowerCase()]} />
+      };
+      return <TableChip text={value} color={chipMapping[value?.toLowerCase()]} />;
     },
     minWidth: 60,
     valueOptions: ['verified', 'unverified']
   }
-]
+];
 
 const Customers = () => {
   const [tableParams, setTableParams] = useState({
     search: '',
     sort: '',
     pageSize: 10,
-    pageNumber: 1,
-    total: 10,
+    page: 1,
+    total: 10
   });
   const history = useHistory();
   const classes = useStyles();
 
-  return <section className={classes.sectionRoot}>
-    <AdminHeader title="Customers" />
+  return (
+    <section className={classes.sectionRoot}>
+      <AdminHeader title="Customers" />
 
-    <Container isAdmin>
-      <div className={classes.tableContainer}>
-        <Table
-          title="Payment History"
-          rows={customersData}
-          columns={columns}
-          setTableParams={setTableParams}
-          tableParams={tableParams}
-          onRowClick={useMemo(() => ({ id }) => history.push(`/admin/customers/${id}`), [history])}
-        />
-      </div>
-    </Container>
-  </section>;
+      <Container isAdmin>
+        <div className={classes.tableContainer}>
+          <Table
+            title="Payment History"
+            rows={customersData}
+            columns={columns}
+            setTableParams={setTableParams}
+            tableParams={tableParams}
+            onRowClick={useMemo(
+              () =>
+                ({ id }) =>
+                  history.push(`/admin/customers/${id}`),
+              [history]
+            )}
+          />
+        </div>
+      </Container>
+    </section>
+  );
 };
 
 const useStyles = makeStyles(() => ({
-  sectionRoot: {
-  },
+  sectionRoot: {},
 
   tableContainer: {
     overflowX: 'auto'

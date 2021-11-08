@@ -1,55 +1,53 @@
 /* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Controller } from 'react-hook-form';
-import { FormControl, FormHelperText, MenuItem, Select, InputLabel } from '@mui/material';
+import { FormControl, MenuItem, Select, InputLabel } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import clsx from 'clsx';
 
-export const SelectInput = ({ rules = {}, name, label, className, options, control }) => {
+export const SelectInput = ({
+  name,
+  label,
+  className,
+  options,
+  value,
+  onChange,
+  ...rest
+}) => {
   const classes = useStyles();
   return (
-    <Controller
-      name={name}
-      control={control}
-      rules={rules}
-      render={({ field: { value, onChange }, fieldState: { error } }) => (
-        <FormControl
-          fullWidth
-          margin="normal"
-          error={!!error}
-          classes={{ root: clsx(classes.select, className) }}
-        >
-          <InputLabel id={name}>{label}</InputLabel>
-          <Select
-            labelId={name}
-            name={name}
-            label={label}
-            value={value}
-            onChange={onChange}
-          >
-            {options.map((option) => (
-              <MenuItem value={option.value} key={option.label}>
-                {option.label}
-              </MenuItem>
-            ))}
-          </Select>
-          <FormHelperText component="span">{error?.message}</FormHelperText>
-        </FormControl>
-      )}
-    />
+    <FormControl
+      fullWidth
+      margin="normal"
+      classes={{ root: clsx(classes.select, className) }}
+    >
+      {label && <InputLabel id={name}>{label}</InputLabel>}
+      <Select
+        labelId={name}
+        name={name}
+        label={label}
+        value={value}
+        onChange={onChange}
+        {...rest}
+      >
+        {options.map((option) => (
+          <MenuItem value={option.value} key={option.label}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 
 SelectInput.propTypes = {
   name: PropTypes.string.isRequired,
-  rules: PropTypes.objectOf(PropTypes.any),
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   options: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 SelectInput.defaultProps = {
-  rules: {}
+  label: ''
 };
 
 const useStyles = makeStyles({

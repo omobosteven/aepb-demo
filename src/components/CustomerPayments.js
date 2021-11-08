@@ -5,7 +5,9 @@ import { Table, TableChip } from 'reusables';
 import { ReactComponent as DisableView } from 'assets/view-disabled.svg';
 import { ReactComponent as View } from 'assets/view.svg';
 import { useState } from 'react';
-import { datatype, date, finance, helpers } from 'faker';
+import { useQuery } from 'react-query';
+import { paymentServices } from 'services/paymentServices';
+import { toast } from 'react-hot-toast';
 import { ProfileCard } from './ProfileCard';
 
 const ViewIcon = ({ component, ...rest }) => (
@@ -19,7 +21,7 @@ const columns = [
     flex: 1,
     minWidth: 60,
     disableColumnMenu: true,
-    valueFormatter: ({ value }) => format(value, 'dd MMM, yyyy')
+    valueFormatter: ({ value }) => format(new Date(value), 'dd MMM, yyyy')
   },
   {
     headerName: 'Amount',
@@ -73,13 +75,34 @@ const columns = [
 
 export const CustomerPayments = () => {
   const classes = useStyles();
+  const [tableData, setTableData] = useState([]);
   const [tableParams, setTableParams] = useState({
     search: '',
-    sort: '',
     pageSize: 10,
-    pageNumber: 1,
-    total: 20,
+    page: 1
   });
+
+  const { isLoading, isFetching } = useQuery(
+    ['payments', tableParams],
+    paymentServices.getPayments,
+    {
+      onSuccess: ({ data, meta }) => {
+        const flattenData = data.map(({ id, attributes }) => ({
+          id,
+          ...attributes
+        }));
+
+        setTableData(flattenData);
+        setTableParams({
+          ...tableParams,
+          ...meta.pagination
+        });
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      }
+    }
+  );
 
   return (
     <Grid container spacing={3}>
@@ -88,17 +111,17 @@ export const CustomerPayments = () => {
       </Grid>
       <Grid item xs={12} className={classes.tableContainer}>
         <Table
+          loading={isLoading || isFetching}
           title="Payment History"
-          rows={paymentData}
+          rows={tableData}
           columns={columns}
           setTableParams={setTableParams}
           tableParams={tableParams}
         />
       </Grid>
     </Grid>
-  )
-
-}
+  );
+};
 
 const useStyles = makeStyles({
   tableContainer: {
@@ -120,13 +143,4 @@ const ActionButton = styled(Button)({
     height: 'auto',
     marginTop: 2
   }
-});
-
-const paymentData = Array.from(Array(10)).map(() => {
-  return {
-    id: datatype.uuid(),
-    amount: finance.amount(5000, 5000),
-    paymentDate: date.past(),
-    status: helpers.randomize(['Successful', 'Pending', 'Failed'])
-  };
 });

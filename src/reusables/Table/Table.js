@@ -32,46 +32,57 @@ export const Table = React.memo(
     ...rest
   }) => {
     const classes = useStyles({ tableHeight });
-    const { pageSize, pageNumber, total } = tableParams;
+    const { pageSize, page, total } = tableParams;
 
+    // Handles the sorting functionality
     const handleSort = (model) => {
       const sortMapping = {
-        asc: '+',
-        desc: '-'
+        asc: 'asc',
+        desc: 'desc'
       };
 
       const sortModel = model.length ? model[0] : null;
       const sortParam = sortModel
-        ? `${sortMapping[sortModel.sort]}${sortModel.field}`
+        ? `${sortModel.field}:${sortMapping[sortModel.sort]}`
         : '';
 
       setTableParams((prevParams) => ({
         ...prevParams,
-        sort: sortParam
+        ...(sortParam && { sort: sortParam })
       }));
     };
 
+    // Handles the filter functionality
     const handleFilter = (model) => {
       if (model.items.length) {
         const item = model.items[0];
         setTableParams((prevParams) => ({
           ...prevParams,
-          searchBy: item.columnField,
-          search: item.value
+          filter: {
+            [`filters[${item.columnField}][$eq]`]: item.value.toLowerCase()
+          }
         }));
       } else {
-        setTableParams((prevParams) => ({
-          ...prevParams,
-          searchBy: '',
-          search: ''
-        }));
+        setTableParams((prevParams) => {
+          const { filter, ...restParams } = prevParams;
+          return restParams;
+        });
       }
     };
 
-    const handlePageChange = (page) => {
+    // Handles the pagination functionality
+    const handlePageChange = (pageNum) => {
       setTableParams((prevParams) => ({
         ...prevParams,
-        pageNumber: page
+        page: pageNum
+      }));
+    };
+
+    const handleRowPerPageChange = (event) => {
+      setTableParams((prevParams) => ({
+        ...prevParams,
+        pageSize: event.target.value,
+        page: 1
       }));
     };
 
@@ -91,7 +102,7 @@ export const Table = React.memo(
               headerHeight={43}
               getRowClassName={() => classes.tableRow}
               classes={{ root: classes.gridRoot }}
-              page={pageNumber - 1}
+              page={page - 1}
               pageSize={pageSize}
               rowCount={total}
               rowsPerPageOptions={pageSizeOptions}
@@ -110,19 +121,14 @@ export const Table = React.memo(
                   title
                 },
                 pagination: {
-                  page: pageNumber - 1,
-                  onPageChange: (event, page) => handlePageChange(page),
+                  page: page - 1,
+                  onPageChange: (event, pageNum) => handlePageChange(pageNum),
                   rowsPerPage: pageSize,
                   rowsPerPageOptions: pageSizeOptions.map((option) => ({
                     value: option,
                     label: `${option} items`
                   })),
-                  onRowsPerPageChange: (event) =>
-                    setTableParams((prevParams) => ({
-                      ...prevParams,
-                      pageSize: event.target.value,
-                      pageNumber: 1
-                    })),
+                  onRowsPerPageChange: handleRowPerPageChange,
                   labelDisplayedRows: ({ from, to, count: totalCount }) =>
                     `Showing ${from} to ${to} of ${totalCount}`,
                   labelRowsPerPage: '',

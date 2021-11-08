@@ -8,7 +8,6 @@ import clsx from 'clsx';
 export const TextField = ({
   errors,
   register,
-  rules = {},
   name,
   label,
   type,
@@ -16,7 +15,7 @@ export const TextField = ({
   ...rest
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const { onBlur, onChange, ref } = register(name, rules);
+  const { onBlur, onChange, ref } = register(name);
   const classes = useStyles();
 
   const renderPasswordToggle = () =>
@@ -61,12 +60,7 @@ export const TextField = ({
 TextField.propTypes = {
   name: PropTypes.string.isRequired,
   register: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
-  rules: PropTypes.objectOf(PropTypes.any)
-};
-
-TextField.defaultProps = {
-  rules: {}
+  label: PropTypes.string.isRequired
 };
 
 const useStyles = makeStyles((theme) => ({
