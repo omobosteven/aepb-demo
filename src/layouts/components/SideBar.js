@@ -61,6 +61,7 @@ export const SideBar = withRouter(({ history, location, width }) => {
 const useStyles = makeStyles((theme) => ({
   drawerRoot: {
     width: ({ width }) => width,
+    border: '2px solid red'
   },
 
   drawerPaper: {
@@ -152,21 +153,21 @@ const MenuItems = [
   {
     label: 'Customers',
     path: AdminPaths.CUSTOMERS,
-    icon: CustomerIcon,
+    icon: CustomerIcon
   },
   {
     label: 'Billing',
     path: AdminPaths.BILLINGS,
-    icon: BillingIcon,
+    icon: BillingIcon
   },
   {
     label: 'Trucks',
     path: AdminPaths.TRUCKS,
-    icon: TrucksIcon,
+    icon: TrucksIcon
   },
   {
     label: 'Settings',
     path: AdminPaths.SETTINGS,
-    icon: SettingIcon,
-  },
+    icon: SettingIcon
+  }
 ];

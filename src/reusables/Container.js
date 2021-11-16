@@ -1,30 +1,24 @@
 import { Container as MuiContainer, styled } from '@mui/material';
 import PropTypes from 'prop-types';
 
-export const Container = ({ children, isAdmin, ...rest }) => {
-  return <StyledContainer isAdmin={isAdmin} {...rest}>{children}</StyledContainer>;
+export const Container = ({ children, ...rest }) => {
+  return <StyledContainer {...rest}>{children}</StyledContainer>;
 };
 
 Container.propTypes = {
   children: PropTypes.node.isRequired,
-  isAdmin: PropTypes.bool,
+  isAdmin: PropTypes.bool
 };
 
 Container.defaultProps = {
-  isAdmin: false,
+  isAdmin: false
 };
 
-const StyledContainer = styled(MuiContainer, {
-  shouldForwardProp: (propName) => propName !== 'isAdmin'
-})(({ isAdmin }) => ({
+const StyledContainer = styled(MuiContainer)({
   height: '100%',
   maxWidth: 1360,
 
-  ...(isAdmin && {
-    marginLeft: 24
-  }),
-
   '@media screen and (min-width: 1280px)': {
-    maxWidth: 1360,
+    maxWidth: 1360
   }
-}));
+});

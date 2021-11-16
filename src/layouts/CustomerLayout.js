@@ -4,11 +4,10 @@ import { AppBar } from './components/AppBar';
 
 export const CustomerLayout = ({ children }) => {
   return (
-    <main>
+    <Main>
       <AppBar showLogo />
-      <Offset />
       <Content>{children}</Content>
-    </main>
+    </Main>
   );
 };
 
@@ -16,11 +15,18 @@ CustomerLayout.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const Offset = styled('div')(({ theme }) => ({
-  ...theme.mixins.toolbar,
-}));
+const Main = styled('main')({
+  display: 'grid',
+  gridTemplateColumns: '100%',
+  gridTemplateRows: '65px auto',
+  gridTemplateAreas: `
+  "navbar"
+  "content"
+  `
+});
 
 const Content = styled('div')({
+  gridArea: 'content',
   paddingTop: 32,
   paddingBottom: 64
 });

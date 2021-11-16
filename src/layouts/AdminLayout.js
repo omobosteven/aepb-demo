@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { styled } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { AppBar } from './components/AppBar';
 import { SideBar } from './components/SideBar';
@@ -7,38 +6,35 @@ import { SideBar } from './components/SideBar';
 const drawerWidth = 216;
 
 export const AdminLayout = ({ children }) => {
-const classes = useStyles({width: drawerWidth });
+  const classes = useStyles();
 
   return (
     <main className={classes.mainRoot}>
-      <AppBar widthSubtraction={drawerWidth} isAdmin />
+      <AppBar />
       <SideBar width={drawerWidth} />
-      <Offset />
-      <article className="contentWrapper">
-        {children}
-      </article>
+      <article className="contentWrapper">{children}</article>
     </main>
-  )
-}
+  );
+};
 
 AdminLayout.propTypes = {
   children: PropTypes.node.isRequired
-}
+};
 
 const useStyles = makeStyles({
   mainRoot: {
-    display: 'flex',
-    flexDirection: 'column',
+    minHeight: '100vh',
+    display: 'grid',
+    gridTemplateColumns: `${drawerWidth}px auto`,
+    gridTemplateRows: '65px auto',
+    gridTemplateAreas: `
+      'sidebar navbar'
+      'sidebar content'
+    `,
 
     '& .contentWrapper': {
-      flexGrow: 1,
-      width: ({ width }) => `calc(100% - ${width}px)`,
-      marginLeft: ({ width }) => width,
+      gridArea: 'content',
       paddingBottom: 32
     }
   }
-})
-
-const Offset = styled('div')(({ theme }) => ({
-  ...theme.mixins.toolbar,
-}));
+});
